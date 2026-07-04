@@ -1,0 +1,58 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  # ── 1. CI: prove the app builds before we touch the server ──
+  build:
+    name: Build (CI check)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+  # ── 2. CD: pull + rebuild + graceful reload on the server ──
+  deploy:
+    name: Deploy to 185.159.154.189
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          command_timeout: 15m
+          script: |
+            set -e
+            cd /var/www/barajtejarat
+            git fetch origin master
+            git reset --hard origin/master
+            npm ci
+            npm run build
+            # cluster mode ⇒ pm2 reload = zero-downtime graceful restart
+            pm2 startOrReload ecosystem.config.js --update-env
+            pm2 save

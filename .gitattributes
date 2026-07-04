@@ -1,0 +1,8 @@
+# normalize text files; force LF where Linux tooling requires it
+* text=auto
+*.sh text eol=lf
+*.conf text eol=lf
+*.jpg binary
+*.png binary
+*.webp binary
+*.ico binary
