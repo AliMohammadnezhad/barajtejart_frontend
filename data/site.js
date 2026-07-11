@@ -302,6 +302,7 @@ export const about = {
   ],
 };
 
+
 export const cta = {
   title: "آماده‌اید محمولهٔ بعدی‌تان را با خیال راحت ارسال کنید؟",
   subtitle:
