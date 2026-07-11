@@ -1,6 +1,6 @@
 # Deployment Guide — baraj-tejarat
 
-Production target: Ubuntu server `185.159.154.189` · Nginx → PM2 → Next.js (port 3000)
+Production target: Ubuntu server `5.102.37.36` · Nginx → PM2 → Next.js (port 3000)
 Repo: `https://github.com/AliMohammadnezhad/barajtejart_frontend.git` (branch `master`)
 
 ## Architecture
@@ -21,7 +21,7 @@ Internet ─▶ Nginx :80 (gzip, cache headers, security headers)
 
 | Secret | Value |
 | --- | --- |
-| `SSH_HOST` | `185.159.154.189` |
+| `SSH_HOST` | `5.102.37.36` |
 | `SSH_USER` | `deploy` |
 | `SSH_PORT` | `22` |
 | `SSH_PRIVATE_KEY` | full contents of the deploy user's **private** key (PEM, incl. BEGIN/END lines) |
@@ -34,7 +34,7 @@ Copy `deploy/server-setup.sh` + `deploy/nginx-barajtejarat.conf` to the server, 
 sudo DEPLOY_PUBKEY="ssh-ed25519 AAAA... deploy@ci" bash server-setup.sh
 ```
 
-The script is numbered [1/7]–[7/7]: update, deploy user, UFW, Nginx, Node 20, PM2 (+ systemd boot persistence), clone/build/start. Step [8] (disable SSH password login) is deliberately manual — run it **only after** confirming `ssh deploy@185.159.154.189` works with your key.
+The script is numbered [1/7]–[7/7]: update, deploy user, UFW, Nginx, Node 20, PM2 (+ systemd boot persistence), clone/build/start. Step [8] (disable SSH password login) is deliberately manual — run it **only after** confirming `ssh deploy@5.102.37.36` works with your key.
 
 ## Key files
 
@@ -55,7 +55,7 @@ Then set `server_name yourdomain.com www.yourdomain.com;` if certbot didn't.
 
 1. **Site unreachable** — `sudo systemctl status nginx`, `sudo nginx -t`, `sudo ufw status` (80/443 open?).
 2. **502 Bad Gateway** — app is down: `pm2 status`, `pm2 logs baraj-tejarat --lines 50`, `curl -I http://127.0.0.1:3000`.
-3. **Action fails at SSH step** — check the 4 secrets; key must be the *private* key matching `~deploy/.ssh/authorized_keys`; try `ssh -i key deploy@185.159.154.189` locally.
+3. **Action fails at SSH step** — check the 4 secrets; key must be the *private* key matching `~deploy/.ssh/authorized_keys`; try `ssh -i key deploy@5.102.37.36` locally.
 4. **`git reset` fails on server** — repo perms: `ls -ld /var/www/barajtejarat` must be owned by `deploy`.
 5. **Build fails on server, works locally** — Node version (`node -v` must be 20.x), disk space (`df -h`), memory (`free -m`; add swap if build OOMs: `fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile`).
 6. **App doesn't survive reboot** — `pm2 save` after any change; verify `systemctl status pm2-deploy`.

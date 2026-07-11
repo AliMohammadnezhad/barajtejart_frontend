@@ -33,7 +33,7 @@ jobs:
 
   # ── 2. CD: pull + rebuild + graceful reload on the server ──
   deploy:
-    name: Deploy to 185.159.154.189
+    name: Deploy to production
     needs: build
     runs-on: ubuntu-latest
     steps:
