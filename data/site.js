@@ -13,8 +13,8 @@ export const siteConfig = {
   phoneLink: "tel:+989145500209",
   mobile: "۰۹۱۴۱۶۴۷۵۱۴",
   mobileLink: "tel:+989141647514",
-  email: "info@barajtejarat.ir",
-  salesEmail: "sale@barajtejarat.ir",
+  email: "Bahmanmostafazadeh75@gmail.com",
+  salesEmail: "Bahmanmostafazadeh75@gmail.com",
   address: "بازرگان، خیابان امام، ساختمان تجاری سلیمانی، طبقه ۲، واحد ۱۳",
   workingHours: "همه‌روزه از ساعت ۸ تا ۲۲ — جمعه‌ها تعطیل",
   // فرم تماس با سرویس Web3Forms ارسال می‌شود؛ کلید رایگان از web3forms.com بگیرید
