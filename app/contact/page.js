@@ -5,7 +5,13 @@ import { siteConfig } from "@/data/site";
 
 export const metadata = {
   title: "تماس با ما",
-  description: `برای استعلام قیمت و مشاوره حمل‌ونقل با ${siteConfig.name} در تماس باشید.`,
+  description: `مشاوره رایگان ترخیص کالا و واردات از چین و اروپا — با کارشناسان ${siteConfig.name} تماس بگیرید: ${siteConfig.phone}`,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: `تماس با ${siteConfig.name}`,
+    description: `استعلام قیمت ترخیص کالا و واردات — پاسخگویی ${siteConfig.workingHours}`,
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {

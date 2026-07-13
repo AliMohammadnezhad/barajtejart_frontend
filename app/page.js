@@ -1,3 +1,5 @@
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/lib/seo";
 import BlogSection from "@/components/BlogSection";
 import CTABanner from "@/components/CTABanner";
 import ContactSection from "@/components/ContactSection";
@@ -12,6 +14,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={faqSchema()} />
       <HeroSection />
       <ServicesSection />
       <FeaturesSection />
