@@ -38,7 +38,7 @@ export const siteConfig = {
   address: "بازرگان، خیابان امام، ساختمان تجاری سلیمانی، طبقه ۲، واحد ۱۳",
   workingHours: "همه‌روزه از ساعت ۸ تا ۲۲ — جمعه‌ها تعطیل",
   // فرم تماس با سرویس Web3Forms ارسال می‌شود؛ کلید رایگان از web3forms.com بگیرید
-  web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
+  web3formsAccessKey: "916797f4-9894-4329-99f9-6fe0ff50a7dc",
   socials: [
     { id: "instagram", label: "اینستاگرام", href: "https://instagram.com" },
     { id: "telegram", label: "تلگرام", href: "https://t.me" },
