@@ -10,7 +10,14 @@ import { services } from "@/data/site";
 export const metadata = {
   title: "خدمات",
   description:
-    "خدمات حمل‌ونقل جاده‌ای، هوایی، دریایی و لجستیک بین‌المللی باراج تجارت.",
+    "خدمات باراج تجارت: ترخیص تخصصی کالا از گمرک، خرید و ارسال کالا از چین و اروپا، و ترخیص تجهیزات صنعتی (بلبرینگ، گیربکس، پمپ).",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "خدمات باراج تجارت",
+    description:
+      "ترخیص کالا، واردات از چین و اروپا و ترخیص تجهیزات صنعتی — زیر یک سقف.",
+    url: "/services",
+  },
 };
 
 export default function ServicesPage() {

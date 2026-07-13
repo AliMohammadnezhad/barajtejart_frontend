@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import CTABanner from "@/components/CTABanner";
+import JsonLd from "@/components/JsonLd";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ServiceIcon from "@/components/ServiceIcon";
+import { breadcrumbSchema, serviceSchema } from "@/lib/seo";
 import { services } from "@/data/site";
 
 export function generateStaticParams() {
@@ -16,7 +18,17 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
-  return { title: service.title, description: service.shortDesc };
+  return {
+    title: service.title,
+    description: service.shortDesc,
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title: service.title,
+      description: service.shortDesc,
+      url: `/services/${slug}`,
+      images: [{ url: service.image, width: 1600, height: 900, alt: service.imageAlt }],
+    },
+  };
 }
 
 export default async function ServicePage({ params }) {
@@ -28,6 +40,15 @@ export default async function ServicePage({ params }) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceSchema(service),
+          breadcrumbSchema([
+            { name: "خدمات", path: "/services" },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+        ]}
+      />
       <PageHeader
         title={service.title}
         subtitle={service.shortDesc}

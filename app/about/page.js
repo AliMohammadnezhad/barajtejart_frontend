@@ -9,7 +9,14 @@ import { about } from "@/data/site";
 
 export const metadata = {
   title: "درباره ما",
-  description: about.subtitle,
+  description:
+    "آشنایی با باراج تجارت؛ بیش از ۱۵ سال تجربه در بازرگانی بین‌المللی، ترخیص تخصصی کالا از گمرک و واردات تجهیزات صنعتی از چین و اروپا.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "دربارهٔ باراج تجارت",
+    description: about.subtitle,
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

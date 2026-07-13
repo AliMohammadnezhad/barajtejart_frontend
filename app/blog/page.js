@@ -7,7 +7,14 @@ import { blogPosts } from "@/data/site";
 
 export const metadata = {
   title: "وبلاگ",
-  description: "مقالات آموزشی حمل‌ونقل بین‌المللی، گمرک و بازرگانی خارجی.",
+  description:
+    "مقالات آموزشی ترخیص کالا، خرید از چین و اروپا، واردات تجهیزات صنعتی و مفاهیم گمرکی — وبلاگ باراج تجارت.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "وبلاگ باراج تجارت",
+    description: "راهنماهای کاربردی واردات، ترخیص کالا و بازرگانی خارجی.",
+    url: "/blog",
+  },
 };
 
 export default function BlogPage() {
