@@ -11,7 +11,7 @@ import {
   FaWhatsapp,
   FaYoutube,
 } from "react-icons/fa";
-import { blogPosts, navLinks, services, siteConfig } from "@/data/site";
+import { navLinks, services, siteConfig } from "@/data/site";
 
 const socialIcons = {
   instagram: FaInstagram,
@@ -65,7 +65,7 @@ export default function Footer() {
               </li>
             ))}
             <li>
-              <Link href={`/blog#${blogPosts[0].slug}`} className="transition hover:text-accent-400">
+              <Link href="/blog" className="transition hover:text-accent-400">
                 آخرین مقالات
               </Link>
             </li>
