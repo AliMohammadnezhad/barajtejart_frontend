@@ -41,3 +41,6 @@ next-env.d.ts
 
 # blog posts published via webhook at runtime (must survive deploys)
 content/published/
+
+# Postman collection (local tooling, not deployed)
+docs/postman/
