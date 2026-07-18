@@ -38,3 +38,6 @@ next-env.d.ts
 
 # pm2 runtime files (server-side only)
 .pm2/
+
+# blog posts published via webhook at runtime (must survive deploys)
+content/published/

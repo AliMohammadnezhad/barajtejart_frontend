@@ -1,6 +1,7 @@
 import { services, siteUrl } from "@/data/site";
+import { getAllPosts } from "@/lib/blog";
 
-export default function sitemap() {
+export default async function sitemap() {
   const now = new Date();
 
   const staticRoutes = [
@@ -8,7 +9,7 @@ export default function sitemap() {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
   ];
 
   const serviceRoutes = services.map((s) => ({
@@ -17,9 +18,17 @@ export default function sitemap() {
     changeFrequency: "monthly",
   }));
 
-  return [...staticRoutes, ...serviceRoutes].map((r) => ({
+  const posts = await getAllPosts();
+  const postRoutes = posts.map((p) => ({
+    path: `/blog/${p.slug}`,
+    priority: 0.7,
+    changeFrequency: "monthly",
+    lastModified: new Date(p.updatedDate || p.publishDate || now),
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...postRoutes].map((r) => ({
     url: `${siteUrl}${r.path}`,
-    lastModified: now,
+    lastModified: r.lastModified ?? now,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
   }));

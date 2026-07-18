@@ -29,4 +29,55 @@
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/70 px-6 py-3 font-bold text-white transition hover:bg-white hover:text-primary-900;
   }
+
+  /* ── تایپوگرافی متن مقاله (خروجی Markdown/HTML) ── */
+  .blog-content {
+    @apply text-base leading-9 text-slate-600;
+  }
+  .blog-content h2 {
+    @apply mb-4 mt-10 scroll-mt-28 text-2xl font-black text-primary-900;
+  }
+  .blog-content h3 {
+    @apply mb-3 mt-8 scroll-mt-28 text-xl font-black text-primary-900;
+  }
+  .blog-content p {
+    @apply mb-5;
+  }
+  .blog-content a {
+    @apply font-bold text-accent-600 hover:underline;
+  }
+  .blog-content strong {
+    @apply font-black text-primary-900;
+  }
+  .blog-content ul {
+    @apply mb-5 list-disc space-y-2 pr-6;
+  }
+  .blog-content ol {
+    @apply mb-5 list-decimal space-y-2 pr-6;
+  }
+  .blog-content blockquote {
+    @apply my-6 rounded-xl border-r-4 border-accent-400 bg-slate-50 px-5 py-4;
+  }
+  .blog-content img {
+    @apply my-6 rounded-2xl;
+  }
+  .blog-content pre {
+    @apply my-6 overflow-x-auto rounded-xl bg-primary-950 p-5 text-sm text-slate-100;
+  }
+  .blog-content code {
+    @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm text-primary-900;
+  }
+  .blog-content pre code {
+    @apply bg-transparent p-0 text-slate-100;
+  }
+  .blog-content table {
+    @apply my-6 w-full border-collapse text-sm;
+  }
+  .blog-content th,
+  .blog-content td {
+    @apply border border-slate-200 px-4 py-2 text-right;
+  }
+  .blog-content th {
+    @apply bg-slate-50 font-black text-primary-900;
+  }
 }
