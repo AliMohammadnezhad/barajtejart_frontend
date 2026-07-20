@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────────────
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { timingSafeEqual } from "crypto";
+import { isAuthorized } from "@/lib/api-auth";
 import {
   deletePost,
   getAnyPostBySlug,
@@ -26,18 +26,6 @@ export const runtime = "nodejs";
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_CONTENT_LENGTH = 200_000; // ~200KB متن
 const ACTIONS = ["upsert", "update", "setStatus", "delete"];
-
-function isAuthorized(req) {
-  const secret = process.env.BLOG_WEBHOOK_SECRET;
-  if (!secret) return null; // پیکربندی نشده
-  const provided =
-    req.headers.get("x-webhook-secret") ||
-    (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!provided) return false;
-  const a = Buffer.from(provided);
-  const b = Buffer.from(secret);
-  return a.length === b.length && timingSafeEqual(a, b); // مقایسهٔ زمان-ثابت
-}
 
 const isStr = (v) => typeof v === "string" && v.trim().length > 0;
 
