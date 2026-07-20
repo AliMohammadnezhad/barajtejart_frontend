@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PostImage from "@/components/blog/PostImage";
 import { FaRegCalendarAlt, FaRegClock, FaUser } from "react-icons/fa";
 import CTABanner from "@/components/CTABanner";
 import JsonLd from "@/components/JsonLd";
@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }) {
           <article className="lg:col-span-2">
             <Reveal>
               <figure className="relative mb-10 h-64 overflow-hidden rounded-3xl shadow-card sm:h-[26rem]">
-                <Image
+                <PostImage
                   src={post.featuredImage}
                   alt={post.featuredImageAlt || post.title}
                   fill
