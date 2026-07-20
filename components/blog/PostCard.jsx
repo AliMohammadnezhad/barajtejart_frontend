@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft, FaRegCalendarAlt, FaRegClock } from "react-icons/fa";
+import PostImage from "@/components/blog/PostImage";
 import { formatDateFa } from "@/lib/blog";
 import { computeReadingTime } from "@/lib/blog-render";
 
@@ -15,7 +15,7 @@ export default function PostCard({ post, headingLevel = "h2" }) {
         href={`/blog/${post.slug}`}
         className="relative block h-52 overflow-hidden"
       >
-        <Image
+        <PostImage
           src={post.featuredImage}
           alt={post.featuredImageAlt || post.title}
           fill

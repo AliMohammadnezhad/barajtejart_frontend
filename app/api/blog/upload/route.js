@@ -12,7 +12,7 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { randomBytes } from "crypto";
-import { isAuthorized } from "@/lib/api-auth";
+import { checkSecret, secretFromHeaders } from "@/lib/api-auth";
 import { siteUrl } from "@/data/site";
 
 export const runtime = "nodejs";
@@ -57,17 +57,19 @@ function jsonError(status, error) {
 }
 
 export async function POST(req) {
-  const auth = isAuthorized(req);
-  if (auth === null)
-    return jsonError(503, "Upload API is not configured (BLOG_WEBHOOK_SECRET missing on server)");
-  if (!auth) return jsonError(401, "Unauthorized");
-
   let form;
   try {
     form = await req.formData();
   } catch {
     return jsonError(400, 'Expected multipart/form-data with a "file" field');
   }
+
+  // secret یا در هدر (x-webhook-secret / Bearer) یا به‌عنوان فیلد فرم "secret"
+  const provided = secretFromHeaders(req) || form.get("secret");
+  const auth = checkSecret(typeof provided === "string" ? provided : "");
+  if (auth === null)
+    return jsonError(503, "Upload API is not configured (BLOG_WEBHOOK_SECRET missing on server)");
+  if (!auth) return jsonError(401, "Unauthorized");
 
   const file = form.get("file");
   if (!file || typeof file.arrayBuffer !== "function")
