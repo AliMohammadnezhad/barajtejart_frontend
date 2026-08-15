@@ -19,6 +19,7 @@ import {
   savePost,
   setPostStatus,
 } from "@/lib/blog";
+import { renderPost } from "@/lib/blog-render";
 import { siteUrl } from "@/data/site";
 
 export const runtime = "nodejs";
@@ -153,6 +154,8 @@ export async function POST(req) {
     const errors = validateFields(body, { partial: true });
     if (errors.length) return jsonError(422, { errors });
 
+    // همهٔ فیلدهای مجاز در upsert (به‌جز slug و updatedDate) اینجا قابل
+    // به‌روزرسانی‌اند؛ فقط فیلدهای حاضر در بدنه بازنویسی می‌شوند (PATCH)
     const UPDATABLE = [
       "title", "description", "metaTitle", "metaDescription", "content",
       "contentFormat", "featuredImage", "featuredImageAlt", "author",
@@ -161,7 +164,16 @@ export async function POST(req) {
     const merged = { ...existing };
     for (const key of UPDATABLE)
       if (body[key] !== undefined)
-        merged[key] = typeof body[key] === "string" ? body[key].trim() : body[key];
+        // content مانند buildPost بدون trim — فاصله‌ها در markdown معنا دارند
+        merged[key] =
+          typeof body[key] === "string" && key !== "content"
+            ? body[key].trim()
+            : body[key];
+
+    // محتوا عوض شده و readingTime صراحتاً نیامده → محاسبهٔ مجدد از محتوای رندرشده
+    if (body.content !== undefined && body.readingTime === undefined)
+      merged.readingTime = renderPost({ ...merged, readingTime: null }).readingTime;
+
     merged.updatedDate = new Date().toISOString().slice(0, 10);
     delete merged.draft;
 
