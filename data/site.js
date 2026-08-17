@@ -54,6 +54,7 @@ export const navLinks = [
   { label: "وبلاگ", href: "/blog" },
   { label: "درباره ما", href: "/about" },
   { label: "تماس با ما", href: "/contact" },
+  { label: "کارت ویزیت", href: "/card" },
 ];
 
 export const hero = {
@@ -291,4 +292,46 @@ export const cta = {
   subtitle:
     "همین حالا درخواست خود را ثبت کنید تا کارشناسان ما در کمتر از یک ساعت کاری با شما تماس بگیرند.",
   button: { label: "درخواست مشاوره رایگان", href: "/contact" },
+};
+
+// ─────────────────────────────────────────────────────────────
+// کارت ویزیت دیجیتال — صفحهٔ /card
+// تمام متن‌ها و اطلاعات تماس کارت از همین‌جا خوانده می‌شود.
+// شماره، ایمیل و آدرس وب‌سایت مستقیماً از siteConfig/siteUrl می‌آیند.
+// ─────────────────────────────────────────────────────────────
+export const businessCard = {
+  metaTitle: "کارت ویزیت دیجیتال",
+  metaDescription:
+    "کارت ویزیت دیجیتال باراج تجارت — حمل و نقل بین‌المللی؛ تماس مستقیم، ارسال ایمیل و وب‌سایت. اسکن کنید تا اطلاعات تماس ما ذخیره شود.",
+  backgroundImage: "/images/bg-2-scaled.jpg",
+  companyFa: siteConfig.name,
+  companyEn: "Baraj Tejarat",
+  tagline: "بازرگانی و واردات و صادرات کالا",
+  qr: {
+    captionFa: "اسکن کنید تا اطلاعات تماس ما را ذخیره کنید",
+    captionEn: "Scan to save our contact info",
+  },
+  ceo: {
+    nameFa: "بهمن مصطفی زاده",
+    nameEn: "Bahman Mostafazadeh",
+    roleFa: "مدیرعامل",
+    roleEn: "CEO",
+  },
+  phoneDisplay: "+98 914 550 0209",
+  // دکمه‌های عملیاتی — hrefها از داده‌های اصلی سایت ساخته می‌شوند
+  actions: {
+    call: { labelEn: "Direct Call", labelFa: "تماس مستقیم", href: siteConfig.phoneLink },
+    email: {
+      labelEn: "Send Email",
+      labelFa: "ارسال ایمیل",
+      href: `mailto:${siteConfig.email}`,
+      sub: siteConfig.email,
+    },
+    website: {
+      labelEn: "Website",
+      labelFa: "وب‌سایت",
+      href: siteUrl,
+      sub: siteUrl.replace("https://", "www."),
+    },
+  },
 };
