@@ -1,6 +1,4 @@
 import { Vazirmatn } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteConfig, siteUrl, seoKeywords } from "@/data/site";
@@ -76,9 +74,7 @@ export default function RootLayout({ children }) {
     <html lang="fa" dir="rtl" className={vazir.variable}>
       <body className="font-sans">
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

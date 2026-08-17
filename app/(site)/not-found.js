@@ -1,6 +1,6 @@
 import NotFoundContent from "@/components/NotFoundContent";
 
-// ۴۰۴ سراسری برای مسیرهای خارج از گروه سایت (بدون نوبار و فوتر)
+// ۴۰۴ داخل گروه سایت — با نوبار و فوتر رندر می‌شود
 export default function NotFound() {
   return <NotFoundContent />;
 }
